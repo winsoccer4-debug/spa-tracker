@@ -156,9 +156,9 @@
 </div>
 
 <script>
-// ===== DATA: ใช้ค่า "from OCTOBER" (ช่องติดกับชื่อรายการ) =====
+// ===== DATA: ค่าจาก "from OCTOBER" ทุกรายการ =====
 const MASSAGE_LIST = [
-  // นวดพื้นฐาน
+  // นวดพื้นฐาน (จากรูป Image 2)
   {id:1,  cat:"นวดพื้นฐาน", name:"Thai 1h",              time:1,    com:9.5},
   {id:2,  cat:"นวดพื้นฐาน", name:"Thai 1.5h",            time:1.5,  com:12.6},
   {id:3,  cat:"นวดพื้นฐาน", name:"Thai with herbs 1h",   time:1,    com:9.5},
@@ -184,73 +184,74 @@ const MASSAGE_LIST = [
   {id:23, cat:"นวดพื้นฐาน", name:"Deep tissue 1h",       time:1,    com:10.5},
   {id:24, cat:"นวดพื้นฐาน", name:"Deep tissue 1.5h",     time:1.5,  com:15.8},
   {id:25, cat:"นวดพื้นฐาน", name:"Sport massage",        time:1,    com:9.5},
-  // นวดเฉพาะส่วน
-  {id:26, cat:"นวดเฉพาะส่วน", name:"Reflex feet",                    time:0.75, com:7.4},
-  {id:27, cat:"นวดเฉพาะส่วน", name:"Thai ritual for legs",           time:0.75, com:7.4},
-  {id:28, cat:"นวดเฉพาะส่วน", name:"Stimulating legs",              time:0.75, com:7.4},
-  {id:29, cat:"นวดเฉพาะส่วน", name:"Relaxing hands",                time:0.5,  com:5.3},
-  {id:30, cat:"นวดเฉพาะส่วน", name:"Back",                          time:0.5,  com:5.3},
-  {id:31, cat:"นวดเฉพาะส่วน", name:"Thai back",                     time:0.5,  com:6.3},
-  {id:32, cat:"นวดเฉพาะส่วน", name:"Thai back with herbs",          time:0.5,  com:5.8},
-  {id:33, cat:"นวดเฉพาะส่วน", name:"Deep back",                     time:0.75, com:7.9},
-  {id:34, cat:"นวดเฉพาะส่วน", name:"Batuka",                        time:0.75, com:7.4},
-  {id:35, cat:"นวดเฉพาะส่วน", name:"Champi",                        time:0.75, com:7.4},
-  {id:36, cat:"นวดเฉพาะส่วน", name:"Thai face with herbs",          time:0.5,  com:5.3},
-  {id:37, cat:"นวดเฉพาะส่วน", name:"Face and head 30min",           time:0.5,  com:5.3},
-  {id:38, cat:"นวดเฉพาะส่วน", name:"Face and head 45min",           time:0.75, com:6.8},
-  {id:39, cat:"นวดเฉพาะส่วน", name:"Scrub",                         time:0.5,  com:5.3},
-  {id:40, cat:"นวดเฉพาะส่วน", name:"Mask",                          time:0.5,  com:5.3},
-  {id:41, cat:"นวดเฉพาะส่วน", name:"Bath",                          time:0.5,  com:4.2},
-  {id:42, cat:"นวดเฉพาะส่วน", name:"back, feet, head",              time:0.5,  com:5.3},
-  {id:43, cat:"นวดเฉพาะส่วน", name:"back, feet, head + feet bath",  time:0.75, com:6.5},
-  // ทรีทเม้นท์ผิว
-  {id:44, cat:"ทรีทเม้นท์ผิว", name:"Thalion moisturing",           time:1, com:8.4},
-  {id:45, cat:"ทรีทเม้นท์ผิว", name:"Casmara",                      time:1, com:7.4},
-  {id:46, cat:"ทรีทเม้นท์ผิว", name:"Budha gold",                   time:1, com:8.4},
-  {id:47, cat:"ทรีทเม้นท์ผิว", name:"Express spa for everybody",    time:1, com:8.4},
-  {id:48, cat:"ทรีทเม้นท์ผิว", name:"Express spa for men",          time:1, com:11.6},
-  {id:49, cat:"ทรีทเม้นท์ผิว", name:"Express spa for women",        time:1, com:11.6},
-  {id:50, cat:"ทรีทเม้นท์ผิว", name:"Deep moisturing face (thalion)",   time:1, com:8.4},
-  {id:51, cat:"ทรีทเม้นท์ผิว", name:"Perfect firmness face (thalion)",  time:1, com:8.4},
-  // ริทชวล & โปรแกรม
-  {id:52, cat:"ริทชวล & โปรแกรม", name:"Pressure of points",        time:1.5,  com:12.6},
-  {id:53, cat:"ริทชวล & โปรแกรม", name:"Oriental eastern charms",   time:1.5,  com:12.6},
-  {id:54, cat:"ริทชวล & โปรแกรม", name:"Cleopatra's dream",         time:1.5,  com:12.6},
-  {id:55, cat:"ริทชวล & โปรแกรม", name:"Eastern body bliss",        time:2,    com:14.7},
-  {id:56, cat:"ริทชวล & โปรแกรม", name:"Chocolate body therapy",    time:2,    com:14.7},
-  {id:57, cat:"ริทชวล & โปรแกรม", name:"Slimming body therapy",     time:2,    com:15.8},
-  {id:58, cat:"ริทชวล & โปรแกรม", name:"Egzotic Bali ritual",       time:2.5,  com:17.9},
-  {id:59, cat:"ริทชวล & โปรแกรม", name:"Thai body ritual",          time:1.5,  com:12.6},
-  {id:60, cat:"ริทชวล & โปรแกรม", name:"Exotic 3 massage combo",    time:0.75, com:6.5},
-  {id:61, cat:"ริทชวล & โปรแกรม", name:"Aroma magic",               time:1.5,  com:11.6},
-  {id:62, cat:"ริทชวล & โปรแกรม", name:"Sabai",                     time:0.75, com:7.5},
-  {id:63, cat:"ริทชวล & โปรแกรม", name:"Magic",                     time:1,    com:8.4},
-  {id:64, cat:"ริทชวล & โปรแกรม", name:"Sweet dream",               time:1,    com:7.4},
-  {id:65, cat:"ริทชวล & โปรแกรม", name:"Energizing spa therapy for men", time:1, com:9.5},
-  {id:66, cat:"ริทชวล & โปรแกรม", name:"Thai back cinnamon",        time:0.5,  com:6.3},
-  {id:67, cat:"ริทชวล & โปรแกรม", name:"Thai/oil+gift (feet bath)", time:1,    com:8.4},
-  // สำหรับคู่
-  {id:68, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (22)",          time:2,   com:22},
-  {id:69, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two",                 time:1.5, com:20},
-  {id:70, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two",            time:1,   com:14},
-  {id:71, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (19)",    time:1.5, com:19},
-  {id:72, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (20)",    time:1.5, com:20},
-  {id:73, cat:"สำหรับคู่ (2 therapists)", name:"Charming island for two",           time:1,   com:14},
-  {id:74, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (23)",          time:2,   com:23},
-  {id:75, cat:"สำหรับคู่ (2 therapists)", name:"Eastern body bliss for two",        time:1.5, com:21},
-  {id:76, cat:"สำหรับคู่ (2 therapists)", name:"Thai ritual for two",               time:2,   com:27.3},
-  {id:77, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (31.5)",     time:2,   com:31.5},
-  {id:78, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (31.5)",          time:2.5, com:31.5},
-  {id:79, cat:"สำหรับคู่ (2 therapists)", name:"Indonesian ritual for two",         time:2.5, com:33.6},
-  // Marine Therapy
+  // นวดเฉพาะส่วน (จากรูป Image 2)
+  {id:26, cat:"นวดเฉพาะส่วน", name:"Reflex feet",                   time:0.75, com:7.4},
+  {id:27, cat:"นวดเฉพาะส่วน", name:"Thai ritual for legs",          time:0.75, com:7.4},
+  {id:28, cat:"นวดเฉพาะส่วน", name:"Stimulating legs",             time:0.75, com:7.4},
+  {id:29, cat:"นวดเฉพาะส่วน", name:"Relaxing hands",               time:0.5,  com:5.3},
+  {id:30, cat:"นวดเฉพาะส่วน", name:"Back",                         time:0.5,  com:5.3},
+  {id:31, cat:"นวดเฉพาะส่วน", name:"Thai back",                    time:0.5,  com:6.3},
+  {id:32, cat:"นวดเฉพาะส่วน", name:"Thai back with herbs",         time:0.5,  com:5.8},
+  {id:33, cat:"นวดเฉพาะส่วน", name:"Deep back",                    time:0.75, com:7.9},
+  {id:34, cat:"นวดเฉพาะส่วน", name:"Batuka",                       time:0.75, com:7.4},
+  {id:35, cat:"นวดเฉพาะส่วน", name:"Champi",                       time:0.75, com:7.4},
+  {id:36, cat:"นวดเฉพาะส่วน", name:"Thai face with herbs",         time:0.5,  com:5.3},
+  {id:37, cat:"นวดเฉพาะส่วน", name:"Face and head 30min",          time:0.5,  com:5.3},
+  {id:38, cat:"นวดเฉพาะส่วน", name:"Face and head 45min",          time:0.75, com:6.8},
+  {id:39, cat:"นวดเฉพาะส่วน", name:"Scrub",                        time:0.5,  com:5.3},
+  {id:40, cat:"นวดเฉพาะส่วน", name:"Mask",                         time:0.5,  com:5.3},
+  {id:41, cat:"นวดเฉพาะส่วน", name:"Bath",                         time:0.5,  com:4.2},
+  {id:42, cat:"นวดเฉพาะส่วน", name:"back, feet, head",             time:0.5,  com:5.3},
+  {id:43, cat:"นวดเฉพาะส่วน", name:"back, feet, head + feet bath", time:0.75, com:6.5},
+  // ทรีทเม้นท์ผิว (จากรูป Image 2)
+  {id:44, cat:"ทรีทเม้นท์ผิว", name:"Thalion moisturing",          time:1, com:8.4},
+  {id:45, cat:"ทรีทเม้นท์ผิว", name:"Casmara",                     time:1, com:7.4},
+  {id:46, cat:"ทรีทเม้นท์ผิว", name:"Budha gold",                  time:1, com:8.4},
+  {id:47, cat:"ทรีทเม้นท์ผิว", name:"Express spa for everybody",   time:1, com:8.4},
+  {id:48, cat:"ทรีทเม้นท์ผิว", name:"Express spa for men",         time:1, com:11.6},
+  {id:49, cat:"ทรีทเม้นท์ผิว", name:"Express spa for women",       time:1, com:11.6},
+  {id:50, cat:"ทรีทเม้นท์ผิว", name:"Deep moisturing face (thalion)",  time:1, com:8.4},
+  {id:51, cat:"ทรีทเม้นท์ผิว", name:"Perfect firmness face (thalion)", time:1, com:8.4},
+  // ริทชวล & โปรแกรม (จากรูป Image 2)
+  {id:52, cat:"ริทชวล & โปรแกรม", name:"Pressure of points",       time:1.5,  com:12.6},
+  {id:53, cat:"ริทชวล & โปรแกรม", name:"Oriental eastern charms",  time:1.5,  com:12.6},
+  {id:54, cat:"ริทชวล & โปรแกรม", name:"Cleopatra's dream",        time:1.5,  com:12.6},
+  {id:55, cat:"ริทชวล & โปรแกรม", name:"Eastern body bliss",       time:2,    com:14.7},
+  {id:56, cat:"ริทชวล & โปรแกรม", name:"Chocolate body therapy",   time:2,    com:14.7},
+  {id:57, cat:"ริทชวล & โปรแกรม", name:"Slimming body therapy",    time:2,    com:15.8},
+  {id:58, cat:"ริทชวล & โปรแกรม", name:"Egzotic Bali ritual",      time:2.5,  com:17.9},
+  // รายการด้านล่างจากรูป Image 1 (ไม่มีใน from OCTOBER ใช้ค่าช่องติดชื่อ)
+  {id:59, cat:"ริทชวล & โปรแกรม", name:"Thai body ritual",         time:1.5,  com:12},
+  {id:60, cat:"ริทชวล & โปรแกรม", name:"Exotic 3 massage combo",   time:0.75, com:6.5},
+  {id:61, cat:"ริทชวล & โปรแกรม", name:"Aroma magic",              time:1.5,  com:11},
+  {id:62, cat:"ริทชวล & โปรแกรม", name:"Sabai",                    time:0.75, com:7.5},
+  {id:63, cat:"ริทชวล & โปรแกรม", name:"Magic",                    time:1,    com:8},
+  {id:64, cat:"ริทชวล & โปรแกรม", name:"Sweet dream",              time:1,    com:7},
+  {id:65, cat:"ริทชวล & โปรแกรม", name:"Energizing spa therapy for men", time:1, com:9},
+  {id:66, cat:"ริทชวล & โปรแกรม", name:"Thai back cinnamon",       time:0.5,  com:6},
+  {id:67, cat:"ริทชวล & โปรแกรม", name:"Thai/oil+gift (feet bath)", time:1,   com:8},
+  // สำหรับคู่ (จากรูป Image 1 และ Image 2)
+  {id:68, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (22)",       time:2,   com:22},
+  {id:69, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two",              time:1.5, com:20},
+  {id:70, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two",         time:1,   com:14},
+  {id:71, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (19)", time:1.5, com:19},
+  {id:72, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (20)", time:1.5, com:20},
+  {id:73, cat:"สำหรับคู่ (2 therapists)", name:"Charming island for two",        time:1,   com:14},
+  {id:74, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (23)",       time:2,   com:23},
+  {id:75, cat:"สำหรับคู่ (2 therapists)", name:"Eastern body bliss for two",     time:1.5, com:21},
+  {id:76, cat:"สำหรับคู่ (2 therapists)", name:"Thai ritual for two",            time:2,   com:27.3},
+  {id:77, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (31.5)",  time:2,   com:31.5},
+  {id:78, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (31.5)",       time:2.5, com:31.5},
+  {id:79, cat:"สำหรับคู่ (2 therapists)", name:"Indonesian ritual for two",      time:2.5, com:33.6},
+  // Marine Therapy (จากรูป Image 2)
   {id:80, cat:"Marine Therapy", name:"Relaxing marine therapy",   time:1.5, com:11.6},
   {id:81, cat:"Marine Therapy", name:"Energising marine therapy", time:1.5, com:13.7},
   {id:82, cat:"Marine Therapy", name:"Detoxing marine therapy",   time:1.5, com:11.6},
   {id:83, cat:"Marine Therapy", name:"Slimming marine therapy",   time:1.5, com:13.7},
-  // คุณแม่ตั้งครรภ์
-  {id:84, cat:"คุณแม่ตั้งครรภ์", name:"I trimester",    time:1.5, com:11.6},
+  // คุณแม่ตั้งครรภ์ (จากรูป Image 2)
+  {id:84, cat:"คุณแม่ตั้งครรภ์", name:"I trimester",      time:1.5, com:11.6},
   {id:85, cat:"คุณแม่ตั้งครรภ์", name:"II-III trimester", time:1.5, com:11.6},
-  {id:86, cat:"คุณแม่ตั้งครรภ์", name:"After birth",    time:1.5, com:11.6},
+  {id:86, cat:"คุณแม่ตั้งครรภ์", name:"After birth",      time:1.5, com:11.6},
 ];
 
 const CAT_COLORS={"นวดพื้นฐาน":"#2d6a4f","นวดเฉพาะส่วน":"#52796f","ทรีทเม้นท์ผิว":"#b5838d","ริทชวล & โปรแกรม":"#6d4c41","สำหรับคู่ (2 therapists)":"#7b4f8e","Marine Therapy":"#1b6ca8","คุณแม่ตั้งครรภ์":"#b07d62"};
@@ -264,7 +265,6 @@ let currentTab="today";
 function todayStr(){return new Date().toISOString().slice(0,10);}
 function fmtDate(d){const[y,m,day]=d.split("-");return`${day}/${m}/${y}`;}
 function monthKey(d){return d.slice(0,7);}
-
 function load(){try{records=JSON.parse(localStorage.getItem("spa_v2")||"{}");}catch(e){records={};}}
 function save(){localStorage.setItem("spa_v2",JSON.stringify(records));}
 
@@ -274,7 +274,7 @@ document.getElementById("date-input").addEventListener("change",function(){curre
 buildCatButtons();
 renderAll();
 
-function updateTodayBtn(){const btn=document.getElementById("btn-today");btn.className=currentDate===todayStr()?"btn-today":"btn-today inactive";}
+function updateTodayBtn(){document.getElementById("btn-today").className=currentDate===todayStr()?"btn-today":"btn-today inactive";}
 function goToday(){currentDate=todayStr();document.getElementById("date-input").value=currentDate;updateTodayBtn();renderAll();}
 
 function switchTab(tab,el){
@@ -332,9 +332,7 @@ function renderHistory(){
 }
 
 function jumpToDate(date){
-  currentDate=date;
-  document.getElementById("date-input").value=date;
-  updateTodayBtn();
+  currentDate=date;document.getElementById("date-input").value=date;updateTodayBtn();
   document.querySelectorAll(".tab").forEach(t=>t.className="tab inactive");
   document.querySelectorAll(".tab")[0].className="tab active";
   currentTab="today";
@@ -368,16 +366,12 @@ function addMassage(m){
   const entry={id:Date.now(),massageId:m.id,name:m.name,time:m.time,com:m.com,at:new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})};
   if(!records[currentDate])records[currentDate]=[];
   records[currentDate].push(entry);
-  save();
-  showToast("✓ เพิ่ม "+m.name);
-  closePicker();
-  renderAll();
+  save();showToast("✓ เพิ่ม "+m.name);closePicker();renderAll();
 }
 
 function removeEntry(date,id){
   records[date]=(records[date]||[]).filter(e=>e.id!==id);
-  save();
-  renderAll();
+  save();renderAll();
 }
 
 function buildCatButtons(){
