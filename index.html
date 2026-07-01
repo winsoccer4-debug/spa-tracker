@@ -9,8 +9,6 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{background:#f7f3ee;font-family:'Sarabun','Segoe UI',sans-serif;max-width:480px;margin:0 auto;padding-bottom:80px;min-height:100vh;}
-
-  /* HEADER */
   .header{background:linear-gradient(135deg,#2d4a3e 0%,#1a3028 100%);padding:20px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2);}
   .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
   .header-label{color:#c8b89a;font-size:11px;letter-spacing:2px;text-transform:uppercase;}
@@ -18,26 +16,16 @@
   .header-badge{background:rgba(200,184,154,.15);border-radius:12px;padding:8px 14px;text-align:right;}
   .header-badge .val{color:#fff;font-size:20px;font-weight:700;}
   .header-badge .lbl{color:#c8b89a;font-size:10px;}
-
-  /* DATE ROW */
   .date-row{display:flex;gap:8px;margin-bottom:12px;}
   .date-input{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(200,184,154,.3);border-radius:8px;color:#fff;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;}
   .btn-today{background:#c8b89a;color:#1a3028;border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;}
   .btn-today.inactive{background:rgba(200,184,154,.2);color:#c8b89a;}
-
-  /* TABS */
   .tabs{display:flex;gap:6px;}
   .tab{flex:1;padding:7px 4px;font-size:12px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;}
   .tab.active{background:#c8b89a;color:#1a3028;font-weight:700;}
   .tab.inactive{background:rgba(255,255,255,.08);color:#c8b89a;}
-
-  /* TOAST */
   .toast{position:fixed;top:160px;left:50%;transform:translateX(-50%);background:#2d4a3e;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.3);white-space:nowrap;display:none;}
-
-  /* CONTENT */
   .content{padding:16px;}
-
-  /* SUMMARY CARD */
   .summary-card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
   .summary-meta{font-size:12px;color:#888;margin-bottom:10px;}
   .summary-grid{display:flex;gap:12px;}
@@ -46,8 +34,6 @@
   .summary-box .lbl{font-size:11px;margin-top:2px;}
   .box-green{background:#f0f7f4;}.box-green .val{color:#2d4a3e;}.box-green .lbl{color:#52796f;}
   .box-purple{background:#f7f0f5;}.box-purple .val{color:#7b4f8e;}.box-purple .lbl{color:#9c7aac;}
-
-  /* ENTRIES */
   .section-title{font-size:12px;font-weight:700;color:#2d4a3e;margin-bottom:8px;padding-left:4px;}
   .entry{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
   .entry-num{width:28px;height:28px;border-radius:8px;background:#2d4a3e;color:#c8b89a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
@@ -56,12 +42,8 @@
   .entry-sub{font-size:11px;color:#888;}
   .entry-com{font-size:16px;font-weight:800;color:#2d6a4f;flex-shrink:0;}
   .entry-del{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1;}
-
-  /* ADD BUTTON */
   .btn-add{width:100%;padding:14px;background:linear-gradient(135deg,#2d4a3e,#1a3028);color:#c8b89a;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(45,74,62,.3);display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;}
   .btn-add span{font-size:20px;}
-
-  /* HISTORY */
   .hist-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;}
   .hist-top{display:flex;justify-content:space-between;align-items:flex-start;}
   .hist-date{font-size:14px;font-weight:700;color:#222;}
@@ -70,8 +52,6 @@
   .hist-total-lbl{font-size:10px;color:#888;text-align:right;}
   .hist-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;}
   .hist-tag{background:#f0f7f4;color:#2d4a3e;font-size:10px;padding:2px 8px;border-radius:20px;}
-
-  /* MONTHLY SUMMARY */
   .month-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
   .month-box{border-radius:14px;padding:14px;text-align:center;}
   .month-box .val{font-size:24px;font-weight:800;}
@@ -84,11 +64,7 @@
   .day-row-name{font-size:13px;font-weight:600;}
   .day-row-sub{font-size:11px;color:#888;margin-left:8px;}
   .day-row-val{font-size:15px;font-weight:800;color:#2d4a3e;}
-
-  /* EMPTY */
   .empty{text-align:center;color:#aaa;padding:40px;font-size:13px;line-height:2;}
-
-  /* MODAL */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;flex-direction:column;justify-content:flex-end;}
   .modal{background:#f7f3ee;border-radius:20px 20px 0 0;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
   .modal-header{padding:16px 16px 10px;border-bottom:1px solid #e8e2d9;position:sticky;top:0;background:#f7f3ee;border-radius:20px 20px 0 0;z-index:10;}
@@ -136,32 +112,23 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- TODAY -->
 <div class="content" id="view-today">
   <div class="summary-card">
     <div class="summary-meta" id="day-meta">—</div>
     <div class="summary-grid">
-      <div class="summary-box box-green">
-        <div class="val" id="day-total">0.0</div>
-        <div class="lbl">ค่าคอมวันนี้</div>
-      </div>
-      <div class="summary-box box-purple">
-        <div class="val" id="month-total-small">0.0</div>
-        <div class="lbl">รวมเดือนนี้</div>
-      </div>
+      <div class="summary-box box-green"><div class="val" id="day-total">0.0</div><div class="lbl">ค่าคอมวันนี้</div></div>
+      <div class="summary-box box-purple"><div class="val" id="month-total-small">0.0</div><div class="lbl">รวมเดือนนี้</div></div>
     </div>
   </div>
   <div id="entries-container"></div>
   <button class="btn-add" onclick="openPicker()"><span>+</span> เพิ่มรายการนวด</button>
 </div>
 
-<!-- HISTORY -->
 <div class="content" id="view-history" style="display:none">
   <div class="section-title">ประวัติทั้งหมด</div>
   <div id="history-container"></div>
 </div>
 
-<!-- SUMMARY -->
 <div class="content" id="view-summary" style="display:none">
   <div class="section-title" id="month-label">สรุปเดือน</div>
   <div class="month-grid">
@@ -174,7 +141,6 @@
   <div id="summary-days"></div>
 </div>
 
-<!-- MODAL PICKER -->
 <div class="modal-overlay" id="modal" style="display:none" onclick="closePickerOutside(event)">
   <div class="modal">
     <div class="modal-header">
@@ -190,155 +156,130 @@
 </div>
 
 <script>
-// ===== DATA =====
+// ===== DATA: ใช้ค่า "from OCTOBER" (ช่องติดกับชื่อรายการ) =====
 const MASSAGE_LIST = [
-  {id:1,cat:"นวดพื้นฐาน",name:"Thai 1h",time:1,com:9},
-  {id:2,cat:"นวดพื้นฐาน",name:"Thai 1.5h",time:1.5,com:12},
-  {id:3,cat:"นวดพื้นฐาน",name:"Thai with herbs 1h",time:1,com:9},
-  {id:4,cat:"นวดพื้นฐาน",name:"Thai with herbs 1.5h",time:1.5,com:12},
-  {id:5,cat:"นวดพื้นฐาน",name:"Oil 1h",time:1,com:8},
-  {id:6,cat:"นวดพื้นฐาน",name:"Oil 1.5h",time:1.5,com:11},
-  {id:7,cat:"นวดพื้นฐาน",name:"Oil with herbs 1h",time:1,com:9},
-  {id:8,cat:"นวดพื้นฐาน",name:"Oil with herbs 1.5h",time:1.5,com:12},
-  {id:9,cat:"นวดพื้นฐาน",name:"Oil with honey 1h",time:1,com:9},
-  {id:10,cat:"นวดพื้นฐาน",name:"Oil with honey 1.5h",time:1.5,com:12},
-  {id:11,cat:"นวดพื้นฐาน",name:"Chocolate 1h",time:1,com:9},
-  {id:12,cat:"นวดพื้นฐาน",name:"Chocolate 1.5h",time:1.5,com:12},
-  {id:13,cat:"นวดพื้นฐาน",name:"Aroma 1h",time:1,com:9},
-  {id:14,cat:"นวดพื้นฐาน",name:"Aroma 1.5h",time:1.5,com:12},
-  {id:15,cat:"นวดพื้นฐาน",name:"Coconut 1h",time:1,com:9},
-  {id:16,cat:"นวดพื้นฐาน",name:"Coconut 1.5h",time:1.5,com:12},
-  {id:17,cat:"นวดพื้นฐาน",name:"Four hands 1h (2 therapists)",time:1,com:16},
-  {id:18,cat:"นวดพื้นฐาน",name:"Deep tissue 1h",time:1,com:10},
-  {id:19,cat:"นวดพื้นฐาน",name:"Deep tissue 1.5h",time:1.5,com:15},
-  {id:20,cat:"นวดพื้นฐาน",name:"Stimulating 1h",time:1,com:10},
-  {id:21,cat:"นวดพื้นฐาน",name:"Stimulating 1.5h",time:1.5,com:15},
-  {id:22,cat:"นวดพื้นฐาน",name:"Slimming 1h",time:1,com:10},
-  {id:23,cat:"นวดพื้นฐาน",name:"Slimming 1.5h",time:1.5,com:15},
-  {id:24,cat:"นวดพื้นฐาน",name:"Sport massage",time:1,com:9},
-  {id:25,cat:"นวดเฉพาะส่วน",name:"Anticell 45min",time:0.75,com:9},
-  {id:26,cat:"นวดเฉพาะส่วน",name:"Reflex feet",time:0.75,com:7},
-  {id:27,cat:"นวดเฉพาะส่วน",name:"Thai ritual for legs",time:0.75,com:7},
-  {id:28,cat:"นวดเฉพาะส่วน",name:"Stimulating legs",time:0.75,com:7},
-  {id:29,cat:"นวดเฉพาะส่วน",name:"Relaxing hands",time:0.5,com:5},
-  {id:30,cat:"นวดเฉพาะส่วน",name:"Back",time:0.5,com:5},
-  {id:31,cat:"นวดเฉพาะส่วน",name:"Thai back",time:0.5,com:6},
-  {id:32,cat:"นวดเฉพาะส่วน",name:"Thai back with herbs",time:0.5,com:5.8},
-  {id:33,cat:"นวดเฉพาะส่วน",name:"Deep back",time:0.75,com:7.5},
-  {id:34,cat:"นวดเฉพาะส่วน",name:"Batuka",time:0.75,com:7},
-  {id:35,cat:"นวดเฉพาะส่วน",name:"Champi",time:0.75,com:7},
-  {id:36,cat:"นวดเฉพาะส่วน",name:"Thai face with herbs",time:0.5,com:5.3},
-  {id:37,cat:"นวดเฉพาะส่วน",name:"Face and head 30min",time:0.5,com:5.3},
-  {id:38,cat:"นวดเฉพาะส่วน",name:"Face and head 45min",time:0.75,com:6.8},
-  {id:39,cat:"นวดเฉพาะส่วน",name:"Scrub",time:0.5,com:5.3},
-  {id:40,cat:"นวดเฉพาะส่วน",name:"Mask",time:0.5,com:5.3},
-  {id:41,cat:"นวดเฉพาะส่วน",name:"Bath",time:0.5,com:4.2},
-  {id:42,cat:"นวดเฉพาะส่วน",name:"back, feet, head",time:0.5,com:5},
-  {id:43,cat:"นวดเฉพาะส่วน",name:"back, feet, head + feet bath",time:0.75,com:6.5},
-  {id:44,cat:"ทรีทเม้นท์ผิว",name:"Thalion moisturing",time:1,com:8.4},
-  {id:45,cat:"ทรีทเม้นท์ผิว",name:"Casmara",time:1,com:7.4},
-  {id:46,cat:"ทรีทเม้นท์ผิว",name:"Budha gold",time:1,com:8.4},
-  {id:47,cat:"ทรีทเม้นท์ผิว",name:"Express spa for everybody",time:1,com:8.4},
-  {id:48,cat:"ทรีทเม้นท์ผิว",name:"Express spa for men",time:1,com:11.6},
-  {id:49,cat:"ทรีทเม้นท์ผิว",name:"Express spa for women",time:1,com:11.6},
-  {id:50,cat:"ทรีทเม้นท์ผิว",name:"Deep moisturing face (thalion)",time:1,com:8.4},
-  {id:51,cat:"ทรีทเม้นท์ผิว",name:"Perfect firmness face (thalion)",time:1,com:8.4},
-  {id:52,cat:"ริทชวล & โปรแกรม",name:"Pressure of points",time:1.5,com:12.6},
-  {id:53,cat:"ริทชวล & โปรแกรม",name:"Oriental eastern charms",time:1.5,com:12.6},
-  {id:54,cat:"ริทชวล & โปรแกรม",name:"Cleopatra's dream",time:1.5,com:12},
-  {id:55,cat:"ริทชวล & โปรแกรม",name:"Eastern body bliss",time:2,com:14.7},
-  {id:56,cat:"ริทชวล & โปรแกรม",name:"Chocolate body therapy",time:2,com:14.7},
-  {id:57,cat:"ริทชวล & โปรแกรม",name:"Slimming body therapy",time:2,com:15.8},
-  {id:58,cat:"ริทชวล & โปรแกรม",name:"Egzotic Bali ritual",time:2.5,com:17.9},
-  {id:59,cat:"ริทชวล & โปรแกรม",name:"Thai body ritual",time:1.5,com:12},
-  {id:60,cat:"ริทชวล & โปรแกรม",name:"Exotic 3 massage combo",time:0.75,com:6.5},
-  {id:61,cat:"ริทชวล & โปรแกรม",name:"Aroma magic",time:1.5,com:11},
-  {id:62,cat:"ริทชวล & โปรแกรม",name:"Sabai",time:0.75,com:7.5},
-  {id:63,cat:"ริทชวล & โปรแกรม",name:"Magic",time:1,com:8},
-  {id:64,cat:"ริทชวล & โปรแกรม",name:"Sweet dream",time:1,com:7},
-  {id:65,cat:"ริทชวล & โปรแกรม",name:"Energizing spa therapy for men",time:1,com:9},
-  {id:66,cat:"ริทชวล & โปรแกรม",name:"Thai back cinnamon",time:0.5,com:6},
-  {id:67,cat:"ริทชวล & โปรแกรม",name:"Thai/oil+gift (feet bath)",time:1,com:8},
-  {id:68,cat:"สำหรับคู่ (2 therapists)",name:"Bali island for two",time:2,com:22},
-  {id:69,cat:"สำหรับคู่ (2 therapists)",name:"Chocolate for two",time:1.5,com:20},
-  {id:70,cat:"สำหรับคู่ (2 therapists)",name:"Eastern charms for two",time:1,com:14},
-  {id:71,cat:"สำหรับคู่ (2 therapists)",name:"Thai magic ritual for two (19)",time:1.5,com:19},
-  {id:72,cat:"สำหรับคู่ (2 therapists)",name:"Thai magic ritual for two (20)",time:1.5,com:20},
-  {id:73,cat:"สำหรับคู่ (2 therapists)",name:"Charming island for two",time:1,com:14},
-  {id:74,cat:"สำหรับคู่ (2 therapists)",name:"Bali island for two (23)",time:2,com:23},
-  {id:75,cat:"สำหรับคู่ (2 therapists)",name:"Eastern body bliss for two",time:1.5,com:21},
-  {id:76,cat:"สำหรับคู่ (2 therapists)",name:"Thai ritual for two",time:2,com:27.3},
-  {id:77,cat:"สำหรับคู่ (2 therapists)",name:"Eastern charms for two (31.5)",time:2,com:31.5},
-  {id:78,cat:"สำหรับคู่ (2 therapists)",name:"Chocolate for two (31.5)",time:2.5,com:31.5},
-  {id:79,cat:"สำหรับคู่ (2 therapists)",name:"Indonesian ritual for two",time:2.5,com:33.6},
-  {id:80,cat:"Marine Therapy",name:"Relaxing marine therapy",time:1.5,com:11.6},
-  {id:81,cat:"Marine Therapy",name:"Energising marine therapy",time:1.5,com:13.7},
-  {id:82,cat:"Marine Therapy",name:"Detoxing marine therapy",time:1.5,com:11.6},
-  {id:83,cat:"Marine Therapy",name:"Slimming marine therapy",time:1.5,com:13.7},
-  {id:84,cat:"คุณแม่ตั้งครรภ์",name:"I trimester",time:1.5,com:11.6},
-  {id:85,cat:"คุณแม่ตั้งครรภ์",name:"II-III trimester",time:1.5,com:11.6},
-  {id:86,cat:"คุณแม่ตั้งครรภ์",name:"After birth",time:1.5,com:11.6},
+  // นวดพื้นฐาน
+  {id:1,  cat:"นวดพื้นฐาน", name:"Thai 1h",              time:1,    com:9.5},
+  {id:2,  cat:"นวดพื้นฐาน", name:"Thai 1.5h",            time:1.5,  com:12.6},
+  {id:3,  cat:"นวดพื้นฐาน", name:"Thai with herbs 1h",   time:1,    com:9.5},
+  {id:4,  cat:"นวดพื้นฐาน", name:"Thai with herbs 1.5h", time:1.5,  com:12.6},
+  {id:5,  cat:"นวดพื้นฐาน", name:"Oil 1h",               time:1,    com:8.4},
+  {id:6,  cat:"นวดพื้นฐาน", name:"Oil 1.5h",             time:1.5,  com:11.6},
+  {id:7,  cat:"นวดพื้นฐาน", name:"Oil with herbs 1h",    time:1,    com:9.5},
+  {id:8,  cat:"นวดพื้นฐาน", name:"Oil with herbs 1.5h",  time:1.5,  com:12.6},
+  {id:9,  cat:"นวดพื้นฐาน", name:"Oil with honey 1h",    time:1,    com:9.5},
+  {id:10, cat:"นวดพื้นฐาน", name:"Oil with honey 1.5h",  time:1.5,  com:12.6},
+  {id:11, cat:"นวดพื้นฐาน", name:"Chocolate 1h",         time:1,    com:9.5},
+  {id:12, cat:"นวดพื้นฐาน", name:"Chocolate 1.5h",       time:1.5,  com:12.6},
+  {id:13, cat:"นวดพื้นฐาน", name:"Aroma 1h",             time:1,    com:9.5},
+  {id:14, cat:"นวดพื้นฐาน", name:"Aroma 1.5h",           time:1.5,  com:12.6},
+  {id:15, cat:"นวดพื้นฐาน", name:"Coconut 1h",           time:1,    com:9.5},
+  {id:16, cat:"นวดพื้นฐาน", name:"Coconut 1.5h",         time:1.5,  com:12.6},
+  {id:17, cat:"นวดพื้นฐาน", name:"Four hands 1h (2 therapists)", time:1, com:16.8},
+  {id:18, cat:"นวดพื้นฐาน", name:"Anticell 45min",       time:0.75, com:9.5},
+  {id:19, cat:"นวดพื้นฐาน", name:"Slimming 1h",          time:1,    com:10.5},
+  {id:20, cat:"นวดพื้นฐาน", name:"Slimming 1.5h",        time:1.5,  com:15.8},
+  {id:21, cat:"นวดพื้นฐาน", name:"Stimulating 1h",       time:1,    com:10.5},
+  {id:22, cat:"นวดพื้นฐาน", name:"Stimulating 1.5h",     time:1.5,  com:15.8},
+  {id:23, cat:"นวดพื้นฐาน", name:"Deep tissue 1h",       time:1,    com:10.5},
+  {id:24, cat:"นวดพื้นฐาน", name:"Deep tissue 1.5h",     time:1.5,  com:15.8},
+  {id:25, cat:"นวดพื้นฐาน", name:"Sport massage",        time:1,    com:9.5},
+  // นวดเฉพาะส่วน
+  {id:26, cat:"นวดเฉพาะส่วน", name:"Reflex feet",                    time:0.75, com:7.4},
+  {id:27, cat:"นวดเฉพาะส่วน", name:"Thai ritual for legs",           time:0.75, com:7.4},
+  {id:28, cat:"นวดเฉพาะส่วน", name:"Stimulating legs",              time:0.75, com:7.4},
+  {id:29, cat:"นวดเฉพาะส่วน", name:"Relaxing hands",                time:0.5,  com:5.3},
+  {id:30, cat:"นวดเฉพาะส่วน", name:"Back",                          time:0.5,  com:5.3},
+  {id:31, cat:"นวดเฉพาะส่วน", name:"Thai back",                     time:0.5,  com:6.3},
+  {id:32, cat:"นวดเฉพาะส่วน", name:"Thai back with herbs",          time:0.5,  com:5.8},
+  {id:33, cat:"นวดเฉพาะส่วน", name:"Deep back",                     time:0.75, com:7.9},
+  {id:34, cat:"นวดเฉพาะส่วน", name:"Batuka",                        time:0.75, com:7.4},
+  {id:35, cat:"นวดเฉพาะส่วน", name:"Champi",                        time:0.75, com:7.4},
+  {id:36, cat:"นวดเฉพาะส่วน", name:"Thai face with herbs",          time:0.5,  com:5.3},
+  {id:37, cat:"นวดเฉพาะส่วน", name:"Face and head 30min",           time:0.5,  com:5.3},
+  {id:38, cat:"นวดเฉพาะส่วน", name:"Face and head 45min",           time:0.75, com:6.8},
+  {id:39, cat:"นวดเฉพาะส่วน", name:"Scrub",                         time:0.5,  com:5.3},
+  {id:40, cat:"นวดเฉพาะส่วน", name:"Mask",                          time:0.5,  com:5.3},
+  {id:41, cat:"นวดเฉพาะส่วน", name:"Bath",                          time:0.5,  com:4.2},
+  {id:42, cat:"นวดเฉพาะส่วน", name:"back, feet, head",              time:0.5,  com:5.3},
+  {id:43, cat:"นวดเฉพาะส่วน", name:"back, feet, head + feet bath",  time:0.75, com:6.5},
+  // ทรีทเม้นท์ผิว
+  {id:44, cat:"ทรีทเม้นท์ผิว", name:"Thalion moisturing",           time:1, com:8.4},
+  {id:45, cat:"ทรีทเม้นท์ผิว", name:"Casmara",                      time:1, com:7.4},
+  {id:46, cat:"ทรีทเม้นท์ผิว", name:"Budha gold",                   time:1, com:8.4},
+  {id:47, cat:"ทรีทเม้นท์ผิว", name:"Express spa for everybody",    time:1, com:8.4},
+  {id:48, cat:"ทรีทเม้นท์ผิว", name:"Express spa for men",          time:1, com:11.6},
+  {id:49, cat:"ทรีทเม้นท์ผิว", name:"Express spa for women",        time:1, com:11.6},
+  {id:50, cat:"ทรีทเม้นท์ผิว", name:"Deep moisturing face (thalion)",   time:1, com:8.4},
+  {id:51, cat:"ทรีทเม้นท์ผิว", name:"Perfect firmness face (thalion)",  time:1, com:8.4},
+  // ริทชวล & โปรแกรม
+  {id:52, cat:"ริทชวล & โปรแกรม", name:"Pressure of points",        time:1.5,  com:12.6},
+  {id:53, cat:"ริทชวล & โปรแกรม", name:"Oriental eastern charms",   time:1.5,  com:12.6},
+  {id:54, cat:"ริทชวล & โปรแกรม", name:"Cleopatra's dream",         time:1.5,  com:12.6},
+  {id:55, cat:"ริทชวล & โปรแกรม", name:"Eastern body bliss",        time:2,    com:14.7},
+  {id:56, cat:"ริทชวล & โปรแกรม", name:"Chocolate body therapy",    time:2,    com:14.7},
+  {id:57, cat:"ริทชวล & โปรแกรม", name:"Slimming body therapy",     time:2,    com:15.8},
+  {id:58, cat:"ริทชวล & โปรแกรม", name:"Egzotic Bali ritual",       time:2.5,  com:17.9},
+  {id:59, cat:"ริทชวล & โปรแกรม", name:"Thai body ritual",          time:1.5,  com:12.6},
+  {id:60, cat:"ริทชวล & โปรแกรม", name:"Exotic 3 massage combo",    time:0.75, com:6.5},
+  {id:61, cat:"ริทชวล & โปรแกรม", name:"Aroma magic",               time:1.5,  com:11.6},
+  {id:62, cat:"ริทชวล & โปรแกรม", name:"Sabai",                     time:0.75, com:7.5},
+  {id:63, cat:"ริทชวล & โปรแกรม", name:"Magic",                     time:1,    com:8.4},
+  {id:64, cat:"ริทชวล & โปรแกรม", name:"Sweet dream",               time:1,    com:7.4},
+  {id:65, cat:"ริทชวล & โปรแกรม", name:"Energizing spa therapy for men", time:1, com:9.5},
+  {id:66, cat:"ริทชวล & โปรแกรม", name:"Thai back cinnamon",        time:0.5,  com:6.3},
+  {id:67, cat:"ริทชวล & โปรแกรม", name:"Thai/oil+gift (feet bath)", time:1,    com:8.4},
+  // สำหรับคู่
+  {id:68, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (22)",          time:2,   com:22},
+  {id:69, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two",                 time:1.5, com:20},
+  {id:70, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two",            time:1,   com:14},
+  {id:71, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (19)",    time:1.5, com:19},
+  {id:72, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (20)",    time:1.5, com:20},
+  {id:73, cat:"สำหรับคู่ (2 therapists)", name:"Charming island for two",           time:1,   com:14},
+  {id:74, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (23)",          time:2,   com:23},
+  {id:75, cat:"สำหรับคู่ (2 therapists)", name:"Eastern body bliss for two",        time:1.5, com:21},
+  {id:76, cat:"สำหรับคู่ (2 therapists)", name:"Thai ritual for two",               time:2,   com:27.3},
+  {id:77, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (31.5)",     time:2,   com:31.5},
+  {id:78, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (31.5)",          time:2.5, com:31.5},
+  {id:79, cat:"สำหรับคู่ (2 therapists)", name:"Indonesian ritual for two",         time:2.5, com:33.6},
+  // Marine Therapy
+  {id:80, cat:"Marine Therapy", name:"Relaxing marine therapy",   time:1.5, com:11.6},
+  {id:81, cat:"Marine Therapy", name:"Energising marine therapy", time:1.5, com:13.7},
+  {id:82, cat:"Marine Therapy", name:"Detoxing marine therapy",   time:1.5, com:11.6},
+  {id:83, cat:"Marine Therapy", name:"Slimming marine therapy",   time:1.5, com:13.7},
+  // คุณแม่ตั้งครรภ์
+  {id:84, cat:"คุณแม่ตั้งครรภ์", name:"I trimester",    time:1.5, com:11.6},
+  {id:85, cat:"คุณแม่ตั้งครรภ์", name:"II-III trimester", time:1.5, com:11.6},
+  {id:86, cat:"คุณแม่ตั้งครรภ์", name:"After birth",    time:1.5, com:11.6},
 ];
 
-const CAT_COLORS = {
-  "นวดพื้นฐาน":"#2d6a4f","นวดเฉพาะส่วน":"#52796f","ทรีทเม้นท์ผิว":"#b5838d",
-  "ริทชวล & โปรแกรม":"#6d4c41","สำหรับคู่ (2 therapists)":"#7b4f8e",
-  "Marine Therapy":"#1b6ca8","คุณแม่ตั้งครรภ์":"#b07d62"
-};
-const CATS = [...new Set(MASSAGE_LIST.map(m=>m.cat))];
+const CAT_COLORS={"นวดพื้นฐาน":"#2d6a4f","นวดเฉพาะส่วน":"#52796f","ทรีทเม้นท์ผิว":"#b5838d","ริทชวล & โปรแกรม":"#6d4c41","สำหรับคู่ (2 therapists)":"#7b4f8e","Marine Therapy":"#1b6ca8","คุณแม่ตั้งครรภ์":"#b07d62"};
+const CATS=[...new Set(MASSAGE_LIST.map(m=>m.cat))];
 
-// ===== STATE =====
-let records = {};
-let currentDate = todayStr();
-let selectedCat = "ทั้งหมด";
-let currentTab = "today";
+let records={};
+let currentDate=todayStr();
+let selectedCat="ทั้งหมด";
+let currentTab="today";
 
-function todayStr(){
-  const d=new Date();
-  return d.toISOString().slice(0,10);
-}
-function fmtDate(d){
-  const [y,m,day]=d.split("-");
-  return `${day}/${m}/${y}`;
-}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function fmtDate(d){const[y,m,day]=d.split("-");return`${day}/${m}/${y}`;}
 function monthKey(d){return d.slice(0,7);}
 
-// ===== STORAGE =====
-function load(){
-  try{ records=JSON.parse(localStorage.getItem("spa_v2")||"{}"); }
-  catch(e){ records={}; }
-}
-function save(){
-  localStorage.setItem("spa_v2",JSON.stringify(records));
-}
+function load(){try{records=JSON.parse(localStorage.getItem("spa_v2")||"{}");}catch(e){records={};}}
+function save(){localStorage.setItem("spa_v2",JSON.stringify(records));}
 
-// ===== INIT =====
 load();
 document.getElementById("date-input").value=currentDate;
-document.getElementById("date-input").addEventListener("change",function(){
-  currentDate=this.value;
-  updateTodayBtn();
-  renderAll();
-});
+document.getElementById("date-input").addEventListener("change",function(){currentDate=this.value;updateTodayBtn();renderAll();});
 buildCatButtons();
 renderAll();
 
-function updateTodayBtn(){
-  const btn=document.getElementById("btn-today");
-  if(currentDate===todayStr()){btn.className="btn-today";}
-  else{btn.className="btn-today inactive";}
-}
-function goToday(){
-  currentDate=todayStr();
-  document.getElementById("date-input").value=currentDate;
-  updateTodayBtn();
-  renderAll();
-}
+function updateTodayBtn(){const btn=document.getElementById("btn-today");btn.className=currentDate===todayStr()?"btn-today":"btn-today inactive";}
+function goToday(){currentDate=todayStr();document.getElementById("date-input").value=currentDate;updateTodayBtn();renderAll();}
 
-// ===== TABS =====
 function switchTab(tab,el){
   currentTab=tab;
-  document.querySelectorAll(".tab").forEach(t=>{t.className="tab inactive";});
+  document.querySelectorAll(".tab").forEach(t=>t.className="tab inactive");
   el.className="tab active";
   document.getElementById("view-today").style.display=tab==="today"?"block":"none";
   document.getElementById("view-history").style.display=tab==="history"?"block":"none";
@@ -346,7 +287,6 @@ function switchTab(tab,el){
   renderAll();
 }
 
-// ===== RENDER ALL =====
 function renderAll(){
   const entries=records[currentDate]||[];
   const dayTotal=entries.reduce((s,e)=>s+e.com,0);
@@ -354,35 +294,23 @@ function renderAll(){
   const mk=monthKey(currentDate);
   const monthDays=Object.keys(records).filter(d=>d.startsWith(mk));
   const monthTotal=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
-
-  // header
   document.getElementById("hdr-today").textContent=dayTotal.toFixed(1);
-
   if(currentTab==="today"){
-    document.getElementById("day-meta").textContent=
-      `${fmtDate(currentDate)} — ${entries.length} รายการ | ${dayHours.toFixed(1)} ชม.`;
+    document.getElementById("day-meta").textContent=`${fmtDate(currentDate)} — ${entries.length} รายการ | ${dayHours.toFixed(1)} ชม.`;
     document.getElementById("day-total").textContent=dayTotal.toFixed(1);
     document.getElementById("month-total-small").textContent=monthTotal.toFixed(1);
     renderEntries(entries);
   }
-  if(currentTab==="history") renderHistory();
-  if(currentTab==="summary") renderSummary();
+  if(currentTab==="history")renderHistory();
+  if(currentTab==="summary")renderSummary();
 }
 
 function renderEntries(entries){
   const c=document.getElementById("entries-container");
-  if(entries.length===0){c.innerHTML="";return;}
+  if(!entries.length){c.innerHTML="";return;}
   let html=`<div class="section-title">รายการวันนี้</div>`;
   entries.forEach((e,i)=>{
-    html+=`<div class="entry">
-      <div class="entry-num">${i+1}</div>
-      <div class="entry-info">
-        <div class="entry-name">${e.name}</div>
-        <div class="entry-sub">${e.time}h · ${e.at}</div>
-      </div>
-      <div class="entry-com">${e.com.toFixed(1)}</div>
-      <button class="entry-del" onclick="removeEntry('${currentDate}',${e.id})">×</button>
-    </div>`;
+    html+=`<div class="entry"><div class="entry-num">${i+1}</div><div class="entry-info"><div class="entry-name">${e.name}</div><div class="entry-sub">${e.time}h · ${e.at}</div></div><div class="entry-com">${e.com.toFixed(1)}</div><button class="entry-del" onclick="removeEntry('${currentDate}',${e.id})">×</button></div>`;
   });
   c.innerHTML=html;
 }
@@ -390,9 +318,7 @@ function renderEntries(entries){
 function renderHistory(){
   const c=document.getElementById("history-container");
   const allDates=Object.keys(records).filter(d=>(records[d]||[]).length>0).sort().reverse();
-  if(allDates.length===0){
-    c.innerHTML=`<div class="empty">ยังไม่มีข้อมูล<br/>เริ่มบันทึกได้เลย!</div>`;return;
-  }
+  if(!allDates.length){c.innerHTML=`<div class="empty">ยังไม่มีข้อมูล<br/>เริ่มบันทึกได้เลย!</div>`;return;}
   let html="";
   allDates.forEach(date=>{
     const entries=records[date]||[];
@@ -400,13 +326,7 @@ function renderHistory(){
     const hours=entries.reduce((s,e)=>s+e.time,0);
     const tags=entries.slice(0,4).map(e=>`<span class="hist-tag">${e.name.split(" ").slice(0,3).join(" ")}</span>`).join("");
     const more=entries.length>4?`<span style="font-size:10px;color:#888">+${entries.length-4}</span>`:"";
-    html+=`<div class="hist-card" onclick="jumpToDate('${date}')">
-      <div class="hist-top">
-        <div><div class="hist-date">${fmtDate(date)}</div><div class="hist-meta">${entries.length} รายการ · ${hours.toFixed(1)} ชม.</div></div>
-        <div><div class="hist-total">${total.toFixed(1)}</div><div class="hist-total-lbl">ค่าคอม</div></div>
-      </div>
-      <div class="hist-tags">${tags}${more}</div>
-    </div>`;
+    html+=`<div class="hist-card" onclick="jumpToDate('${date}')"><div class="hist-top"><div><div class="hist-date">${fmtDate(date)}</div><div class="hist-meta">${entries.length} รายการ · ${hours.toFixed(1)} ชม.</div></div><div><div class="hist-total">${total.toFixed(1)}</div><div class="hist-total-lbl">ค่าคอม</div></div></div><div class="hist-tags">${tags}${more}</div></div>`;
   });
   c.innerHTML=html;
 }
@@ -426,7 +346,7 @@ function jumpToDate(date){
 
 function renderSummary(){
   const mk=monthKey(currentDate);
-  const [y,m]=mk.split("-");
+  const[y,m]=mk.split("-");
   document.getElementById("month-label").textContent=`สรุปเดือน ${m}/${y}`;
   const monthDays=Object.keys(records).filter(d=>d.startsWith(mk)&&(records[d]||[]).length>0);
   const monthTotal=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
@@ -439,21 +359,14 @@ function renderSummary(){
   monthDays.sort().reverse().forEach(date=>{
     const entries=records[date]||[];
     const total=entries.reduce((s,e)=>s+e.com,0);
-    html+=`<div class="day-row">
-      <div><span class="day-row-name">${fmtDate(date)}</span><span class="day-row-sub">${entries.length} รายการ</span></div>
-      <div class="day-row-val">${total.toFixed(1)}</div>
-    </div>`;
+    html+=`<div class="day-row"><div><span class="day-row-name">${fmtDate(date)}</span><span class="day-row-sub">${entries.length} รายการ</span></div><div class="day-row-val">${total.toFixed(1)}</div></div>`;
   });
   document.getElementById("summary-days").innerHTML=html||`<div class="empty">ยังไม่มีข้อมูลเดือนนี้</div>`;
 }
 
-// ===== ADD / REMOVE =====
 function addMassage(m){
-  const entry={
-    id:Date.now(),massageId:m.id,name:m.name,time:m.time,com:m.com,
-    at:new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})
-  };
-  if(!records[currentDate]) records[currentDate]=[];
+  const entry={id:Date.now(),massageId:m.id,name:m.name,time:m.time,com:m.com,at:new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})};
+  if(!records[currentDate])records[currentDate]=[];
   records[currentDate].push(entry);
   save();
   showToast("✓ เพิ่ม "+m.name);
@@ -467,64 +380,35 @@ function removeEntry(date,id){
   renderAll();
 }
 
-// ===== PICKER =====
 function buildCatButtons(){
   const scroll=document.getElementById("cat-scroll");
   let html=`<button class="cat-btn active" onclick="setCat('ทั้งหมด',this)">ทั้งหมด</button>`;
-  CATS.forEach(c=>{
-    html+=`<button class="cat-btn" onclick="setCat('${c}',this)">${c.split(" ")[0]}</button>`;
-  });
+  CATS.forEach(c=>{html+=`<button class="cat-btn" onclick="setCat('${c}',this)">${c.split(" ")[0]}</button>`;});
   scroll.innerHTML=html;
 }
-function setCat(cat,el){
-  selectedCat=cat;
-  document.querySelectorAll(".cat-btn").forEach(b=>b.className="cat-btn");
-  el.className="cat-btn active";
-  renderPicker();
-}
-function openPicker(){
-  document.getElementById("modal").style.display="flex";
-  document.getElementById("search-input").value="";
-  selectedCat="ทั้งหมด";
-  document.querySelectorAll(".cat-btn").forEach((b,i)=>{b.className=i===0?"cat-btn active":"cat-btn";});
-  renderPicker();
-}
+function setCat(cat,el){selectedCat=cat;document.querySelectorAll(".cat-btn").forEach(b=>b.className="cat-btn");el.className="cat-btn active";renderPicker();}
+function openPicker(){document.getElementById("modal").style.display="flex";document.getElementById("search-input").value="";selectedCat="ทั้งหมด";document.querySelectorAll(".cat-btn").forEach((b,i)=>{b.className=i===0?"cat-btn active":"cat-btn";});renderPicker();}
 function closePicker(){document.getElementById("modal").style.display="none";}
 function closePickerOutside(e){if(e.target.id==="modal")closePicker();}
+
 function renderPicker(){
   const q=document.getElementById("search-input").value.toLowerCase();
-  const filtered=MASSAGE_LIST.filter(m=>{
-    const matchCat=selectedCat==="ทั้งหมด"||m.cat===selectedCat;
-    const matchQ=m.name.toLowerCase().includes(q);
-    return matchCat&&matchQ;
-  });
+  const filtered=MASSAGE_LIST.filter(m=>(selectedCat==="ทั้งหมด"||m.cat===selectedCat)&&m.name.toLowerCase().includes(q));
   const grouped={};
-  CATS.forEach(c=>{
-    const items=filtered.filter(m=>m.cat===c);
-    if(items.length) grouped[c]=items;
-  });
+  CATS.forEach(c=>{const items=filtered.filter(m=>m.cat===c);if(items.length)grouped[c]=items;});
   let html="";
   Object.entries(grouped).forEach(([cat,items])=>{
     const color=CAT_COLORS[cat]||"#555";
     html+=`<div class="cat-label" style="color:${color}">${cat}</div>`;
     items.forEach(m=>{
-      html+=`<button class="massage-btn" onclick="addMassage(MASSAGE_LIST.find(x=>x.id===${m.id}))">
-        <div><div class="massage-name">${m.name}</div><div class="massage-time">${m.time}h</div></div>
-        <div class="massage-com" style="background:${color}">${m.com.toFixed(1)}</div>
-      </button>`;
+      html+=`<button class="massage-btn" onclick='addMassage(MASSAGE_LIST.find(x=>x.id===${m.id}))'><div><div class="massage-name">${m.name}</div><div class="massage-time">${m.time}h</div></div><div class="massage-com" style="background:${color}">${m.com.toFixed(1)}</div></button>`;
     });
   });
-  if(!html) html=`<div class="empty">ไม่พบรายการที่ค้นหา</div>`;
+  if(!html)html=`<div class="empty">ไม่พบรายการที่ค้นหา</div>`;
   document.getElementById("modal-list").innerHTML=html;
 }
 
-// ===== TOAST =====
-function showToast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg;t.style.display="block";
-  clearTimeout(window._toastTimer);
-  window._toastTimer=setTimeout(()=>{t.style.display="none";},2000);
-}
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>{t.style.display="none";},2000);}
 </script>
 </body>
 </html>
