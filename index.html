@@ -4,19 +4,25 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <title>Spa Commission Tracker</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{background:#f7f3ee;font-family:'Sarabun','Segoe UI',sans-serif;max-width:480px;margin:0 auto;padding-bottom:80px;min-height:100vh;}
-  .header{background:linear-gradient(135deg,#2d4a3e 0%,#1a3028 100%);padding:20px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2);}
-  .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .header{background:linear-gradient(135deg,#2d4a3e 0%,#1a3028 100%);padding:16px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+  .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .header-label{color:#c8b89a;font-size:11px;letter-spacing:2px;text-transform:uppercase;}
-  .header-title{color:#fff;font-size:20px;font-weight:700;margin-top:2px;}
-  .header-badge{background:rgba(200,184,154,.15);border-radius:12px;padding:8px 14px;text-align:right;}
-  .header-badge .val{color:#fff;font-size:20px;font-weight:700;}
+  .header-title{color:#fff;font-size:18px;font-weight:700;margin-top:2px;}
+  .header-badge{background:rgba(200,184,154,.15);border-radius:12px;padding:6px 12px;text-align:right;}
+  .header-badge .val{color:#fff;font-size:18px;font-weight:700;}
   .header-badge .lbl{color:#c8b89a;font-size:10px;}
-  .date-row{display:flex;gap:8px;margin-bottom:12px;}
+
+  /* RATE BAR */
+  .rate-bar{background:rgba(255,255,255,0.08);border-radius:10px;padding:8px 12px;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .rate-label{color:#c8b89a;font-size:11px;white-space:nowrap;}
+  .rate-input{background:rgba(255,255,255,0.15);border:1px solid rgba(200,184,154,0.4);border-radius:6px;color:#fff;padding:4px 8px;font-size:13px;width:80px;outline:none;font-family:inherit;text-align:center;}
+  .rate-result{color:#fff;font-size:11px;margin-left:auto;white-space:nowrap;}
+
+  .date-row{display:flex;gap:8px;margin-bottom:10px;}
   .date-input{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(200,184,154,.3);border-radius:8px;color:#fff;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;}
   .btn-today{background:#c8b89a;color:#1a3028;border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;}
   .btn-today.inactive{background:rgba(200,184,154,.2);color:#c8b89a;}
@@ -24,65 +30,79 @@
   .tab{flex:1;padding:7px 4px;font-size:12px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;}
   .tab.active{background:#c8b89a;color:#1a3028;font-weight:700;}
   .tab.inactive{background:rgba(255,255,255,.08);color:#c8b89a;}
-  .toast{position:fixed;top:160px;left:50%;transform:translateX(-50%);background:#2d4a3e;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.3);white-space:nowrap;display:none;}
+
+  .toast{position:fixed;top:180px;left:50%;transform:translateX(-50%);background:#2d4a3e;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.3);white-space:nowrap;display:none;}
   .content{padding:16px;}
   .summary-card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
   .summary-meta{font-size:12px;color:#888;margin-bottom:10px;}
-  .summary-grid{display:flex;gap:12px;}
+  .summary-grid{display:flex;gap:10px;}
   .summary-box{flex:1;text-align:center;border-radius:10px;padding:10px;}
-  .summary-box .val{font-size:22px;font-weight:800;}
-  .summary-box .lbl{font-size:11px;margin-top:2px;}
-  .box-green{background:#f0f7f4;}.box-green .val{color:#2d4a3e;}.box-green .lbl{color:#52796f;}
-  .box-purple{background:#f7f0f5;}.box-purple .val{color:#7b4f8e;}.box-purple .lbl{color:#9c7aac;}
+  .summary-box .val{font-size:18px;font-weight:800;}
+  .summary-box .val2{font-size:11px;font-weight:600;margin-top:2px;}
+  .summary-box .lbl{font-size:10px;margin-top:2px;}
+  .box-green{background:#f0f7f4;}.box-green .val{color:#2d4a3e;}.box-green .val2{color:#52796f;}.box-green .lbl{color:#888;}
+  .box-purple{background:#f7f0f5;}.box-purple .val{color:#7b4f8e;}.box-purple .val2{color:#9c7aac;}.box-purple .lbl{color:#888;}
+
   .section-title{font-size:12px;font-weight:700;color:#2d4a3e;margin-bottom:8px;padding-left:4px;}
-  .entry{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
-  .entry-num{width:28px;height:28px;border-radius:8px;background:#2d4a3e;color:#c8b89a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+  .entry{background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .entry-num{width:26px;height:26px;border-radius:7px;background:#2d4a3e;color:#c8b89a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
   .entry-info{flex:1;min-width:0;}
-  .entry-name{font-size:13px;font-weight:600;color:#222;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .entry-sub{font-size:11px;color:#888;}
-  .entry-com{font-size:16px;font-weight:800;color:#2d6a4f;flex-shrink:0;}
-  .entry-del{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1;}
+  .entry-name{font-size:12px;font-weight:600;color:#222;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .entry-sub{font-size:10px;color:#888;}
+  .entry-com{text-align:right;flex-shrink:0;}
+  .entry-com .eur{font-size:14px;font-weight:800;color:#2d6a4f;}
+  .entry-com .thb{font-size:10px;color:#888;}
+  .entry-del{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer;padding:2px 4px;flex-shrink:0;line-height:1;}
   .btn-add{width:100%;padding:14px;background:linear-gradient(135deg,#2d4a3e,#1a3028);color:#c8b89a;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(45,74,62,.3);display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;}
-  .btn-add span{font-size:20px;}
+
   .hist-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;}
   .hist-top{display:flex;justify-content:space-between;align-items:flex-start;}
   .hist-date{font-size:14px;font-weight:700;color:#222;}
   .hist-meta{font-size:11px;color:#888;margin-top:2px;}
-  .hist-total{font-size:20px;font-weight:800;color:#2d4a3e;}
-  .hist-total-lbl{font-size:10px;color:#888;text-align:right;}
+  .hist-com{text-align:right;}
+  .hist-com .eur{font-size:18px;font-weight:800;color:#2d4a3e;}
+  .hist-com .thb{font-size:11px;color:#888;}
   .hist-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;}
   .hist-tag{background:#f0f7f4;color:#2d4a3e;font-size:10px;padding:2px 8px;border-radius:20px;}
+
   .month-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
   .month-box{border-radius:14px;padding:14px;text-align:center;}
-  .month-box .val{font-size:24px;font-weight:800;}
+  .month-box .val{font-size:20px;font-weight:800;}
+  .month-box .val2{font-size:11px;font-weight:600;margin-top:2px;}
   .month-box .lbl{font-size:11px;color:#888;margin-top:2px;}
-  .bg-green{background:#f0f7f4;}.bg-green .val{color:#2d4a3e;}
+  .bg-green{background:#f0f7f4;}.bg-green .val{color:#2d4a3e;}.bg-green .val2{color:#52796f;}
   .bg-purple{background:#f7f0f5;}.bg-purple .val{color:#7b4f8e;}
   .bg-blue{background:#eef4fb;}.bg-blue .val{color:#1b6ca8;}
-  .bg-warm{background:#fdf5f0;}.bg-warm .val{color:#b07d62;}
+  .bg-warm{background:#fdf5f0;}.bg-warm .val{color:#b07d62;}.bg-warm .val2{color:#c49070;}
+
   .day-row{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:6px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
-  .day-row-name{font-size:13px;font-weight:600;}
-  .day-row-sub{font-size:11px;color:#888;margin-left:8px;}
-  .day-row-val{font-size:15px;font-weight:800;color:#2d4a3e;}
+  .day-left .name{font-size:13px;font-weight:600;}
+  .day-left .sub{font-size:11px;color:#888;}
+  .day-right{text-align:right;}
+  .day-right .eur{font-size:14px;font-weight:800;color:#2d4a3e;}
+  .day-right .thb{font-size:10px;color:#888;}
+
   .empty{text-align:center;color:#aaa;padding:40px;font-size:13px;line-height:2;}
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;flex-direction:column;justify-content:flex-end;}
   .modal{background:#f7f3ee;border-radius:20px 20px 0 0;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
-  .modal-header{padding:16px 16px 10px;border-bottom:1px solid #e8e2d9;position:sticky;top:0;background:#f7f3ee;border-radius:20px 20px 0 0;z-index:10;}
-  .modal-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .modal-header{padding:14px 14px 8px;border-bottom:1px solid #e8e2d9;position:sticky;top:0;background:#f7f3ee;border-radius:20px 20px 0 0;z-index:10;}
+  .modal-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
   .modal-title{font-size:15px;font-weight:700;color:#1a3028;}
-  .btn-close{background:#e8e2d9;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;color:#555;display:flex;align-items:center;justify-content:center;}
-  .search-input{width:100%;padding:9px 12px;font-size:13px;border:1px solid #ddd;border-radius:10px;background:#fff;outline:none;font-family:inherit;margin-bottom:8px;}
-  .cat-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;}
+  .btn-close{background:#e8e2d9;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;color:#555;}
+  .search-input{width:100%;padding:8px 12px;font-size:13px;border:1px solid #ddd;border-radius:10px;background:#fff;outline:none;font-family:inherit;margin-bottom:8px;}
+  .cat-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
   .cat-scroll::-webkit-scrollbar{display:none;}
-  .cat-btn{white-space:nowrap;padding:5px 10px;font-size:11px;border-radius:20px;cursor:pointer;flex-shrink:0;font-family:inherit;border:1px solid #ddd;background:#fff;color:#555;}
+  .cat-btn{white-space:nowrap;padding:4px 10px;font-size:11px;border-radius:20px;cursor:pointer;flex-shrink:0;font-family:inherit;border:1px solid #ddd;background:#fff;color:#555;}
   .cat-btn.active{background:#2d4a3e;color:#fff;border-color:#2d4a3e;}
-  .modal-list{overflow-y:auto;padding:8px 12px 24px;}
-  .cat-label{font-size:11px;font-weight:700;padding:10px 4px 4px;letter-spacing:.5px;text-transform:uppercase;}
-  .massage-btn{width:100%;text-align:left;background:#fff;border:none;border-radius:10px;padding:10px 12px;margin-bottom:4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.06);font-family:inherit;}
+  .modal-list{overflow-y:auto;padding:6px 12px 24px;}
+  .cat-label{font-size:11px;font-weight:700;padding:8px 4px 4px;letter-spacing:.5px;text-transform:uppercase;}
+  .massage-btn{width:100%;text-align:left;background:#fff;border:none;border-radius:10px;padding:9px 12px;margin-bottom:4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.06);font-family:inherit;}
   .massage-btn:active{background:#f0f7f4;}
   .massage-name{font-size:13px;font-weight:600;color:#222;}
   .massage-time{font-size:11px;color:#888;margin-top:1px;}
-  .massage-com{color:#fff;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;flex-shrink:0;}
+  .massage-com{text-align:right;flex-shrink:0;}
+  .massage-com .eur{color:#fff;border-radius:8px;padding:3px 8px;font-size:12px;font-weight:700;display:block;}
+  .massage-com .thb{font-size:10px;color:#888;display:block;margin-top:2px;text-align:right;}
 </style>
 </head>
 <body>
@@ -95,10 +115,19 @@
     </div>
     <div class="header-badge">
       <div class="lbl">วันนี้</div>
-      <div class="val" id="hdr-today">0.0</div>
-      <div class="lbl">หน่วย</div>
+      <div class="val" id="hdr-today">€0.0</div>
+      <div class="lbl" id="hdr-today-thb">฿0</div>
     </div>
   </div>
+
+  <!-- อัตราแลกเปลี่ยน -->
+  <div class="rate-bar">
+    <span class="rate-label">€1 =</span>
+    <input class="rate-input" type="number" id="rate-input" value="38" min="1" step="0.5" oninput="onRateChange()"/>
+    <span class="rate-label">บาท</span>
+    <span class="rate-result" id="rate-display">อัตราปัจจุบัน: 38 ฿/€</span>
+  </div>
+
   <div class="date-row">
     <input type="date" class="date-input" id="date-input"/>
     <button class="btn-today" id="btn-today" onclick="goToday()">วันนี้</button>
@@ -116,12 +145,20 @@
   <div class="summary-card">
     <div class="summary-meta" id="day-meta">—</div>
     <div class="summary-grid">
-      <div class="summary-box box-green"><div class="val" id="day-total">0.0</div><div class="lbl">ค่าคอมวันนี้</div></div>
-      <div class="summary-box box-purple"><div class="val" id="month-total-small">0.0</div><div class="lbl">รวมเดือนนี้</div></div>
+      <div class="summary-box box-green">
+        <div class="val" id="day-total-eur">€0.0</div>
+        <div class="val2" id="day-total-thb">฿0</div>
+        <div class="lbl">ค่าคอมวันนี้</div>
+      </div>
+      <div class="summary-box box-purple">
+        <div class="val" id="month-total-eur">€0.0</div>
+        <div class="val2" id="month-total-thb">฿0</div>
+        <div class="lbl">รวมเดือนนี้</div>
+      </div>
     </div>
   </div>
   <div id="entries-container"></div>
-  <button class="btn-add" onclick="openPicker()"><span>+</span> เพิ่มรายการนวด</button>
+  <button class="btn-add" onclick="openPicker()"><span style="font-size:20px">+</span> เพิ่มรายการนวด</button>
 </div>
 
 <div class="content" id="view-history" style="display:none">
@@ -132,10 +169,10 @@
 <div class="content" id="view-summary" style="display:none">
   <div class="section-title" id="month-label">สรุปเดือน</div>
   <div class="month-grid">
-    <div class="month-box bg-green"><div class="val" id="s-total">0</div><div class="lbl">ค่าคอมรวม</div></div>
+    <div class="month-box bg-green"><div class="val" id="s-eur">€0</div><div class="val2" id="s-thb">฿0</div><div class="lbl">ค่าคอมรวม</div></div>
     <div class="month-box bg-purple"><div class="val" id="s-sessions">0</div><div class="lbl">จำนวนครั้ง</div></div>
     <div class="month-box bg-blue"><div class="val" id="s-days">0</div><div class="lbl">วันที่ทำงาน</div></div>
-    <div class="month-box bg-warm"><div class="val" id="s-avg">0</div><div class="lbl">เฉลี่ย/วัน</div></div>
+    <div class="month-box bg-warm"><div class="val" id="s-avg-eur">€0</div><div class="val2" id="s-avg-thb">฿0</div><div class="lbl">เฉลี่ย/วัน</div></div>
   </div>
   <div class="section-title">รายวัน</div>
   <div id="summary-days"></div>
@@ -156,9 +193,9 @@
 </div>
 
 <script>
-// ===== DATA: ค่าจาก "from OCTOBER" ทุกรายการ =====
+// ===== DATA: ค่าคอม หน่วย ยูโร (€) =====
 const MASSAGE_LIST = [
-  // นวดพื้นฐาน (จากรูป Image 2)
+  // นวดพื้นฐาน
   {id:1,  cat:"นวดพื้นฐาน", name:"Thai 1h",              time:1,    com:9.5},
   {id:2,  cat:"นวดพื้นฐาน", name:"Thai 1.5h",            time:1.5,  com:12.6},
   {id:3,  cat:"นวดพื้นฐาน", name:"Thai with herbs 1h",   time:1,    com:9.5},
@@ -175,7 +212,7 @@ const MASSAGE_LIST = [
   {id:14, cat:"นวดพื้นฐาน", name:"Aroma 1.5h",           time:1.5,  com:12.6},
   {id:15, cat:"นวดพื้นฐาน", name:"Coconut 1h",           time:1,    com:9.5},
   {id:16, cat:"นวดพื้นฐาน", name:"Coconut 1.5h",         time:1.5,  com:12.6},
-  {id:17, cat:"นวดพื้นฐาน", name:"Four hands 1h (2 therapists)", time:1, com:16.8},
+  {id:17, cat:"นวดพื้นฐาน", name:"Four hands 1h (2 therapists)", time:1, com:8.4},
   {id:18, cat:"นวดพื้นฐาน", name:"Anticell 45min",       time:0.75, com:9.5},
   {id:19, cat:"นวดพื้นฐาน", name:"Slimming 1h",          time:1,    com:10.5},
   {id:20, cat:"นวดพื้นฐาน", name:"Slimming 1.5h",        time:1.5,  com:15.8},
@@ -184,7 +221,7 @@ const MASSAGE_LIST = [
   {id:23, cat:"นวดพื้นฐาน", name:"Deep tissue 1h",       time:1,    com:10.5},
   {id:24, cat:"นวดพื้นฐาน", name:"Deep tissue 1.5h",     time:1.5,  com:15.8},
   {id:25, cat:"นวดพื้นฐาน", name:"Sport massage",        time:1,    com:9.5},
-  // นวดเฉพาะส่วน (จากรูป Image 2)
+  // นวดเฉพาะส่วน
   {id:26, cat:"นวดเฉพาะส่วน", name:"Reflex feet",                   time:0.75, com:7.4},
   {id:27, cat:"นวดเฉพาะส่วน", name:"Thai ritual for legs",          time:0.75, com:7.4},
   {id:28, cat:"นวดเฉพาะส่วน", name:"Stimulating legs",             time:0.75, com:7.4},
@@ -203,7 +240,7 @@ const MASSAGE_LIST = [
   {id:41, cat:"นวดเฉพาะส่วน", name:"Bath",                         time:0.5,  com:4.2},
   {id:42, cat:"นวดเฉพาะส่วน", name:"back, feet, head",             time:0.5,  com:5.3},
   {id:43, cat:"นวดเฉพาะส่วน", name:"back, feet, head + feet bath", time:0.75, com:6.5},
-  // ทรีทเม้นท์ผิว (จากรูป Image 2)
+  // ทรีทเม้นท์ผิว
   {id:44, cat:"ทรีทเม้นท์ผิว", name:"Thalion moisturing",          time:1, com:8.4},
   {id:45, cat:"ทรีทเม้นท์ผิว", name:"Casmara",                     time:1, com:7.4},
   {id:46, cat:"ทรีทเม้นท์ผิว", name:"Budha gold",                  time:1, com:8.4},
@@ -212,7 +249,7 @@ const MASSAGE_LIST = [
   {id:49, cat:"ทรีทเม้นท์ผิว", name:"Express spa for women",       time:1, com:11.6},
   {id:50, cat:"ทรีทเม้นท์ผิว", name:"Deep moisturing face (thalion)",  time:1, com:8.4},
   {id:51, cat:"ทรีทเม้นท์ผิว", name:"Perfect firmness face (thalion)", time:1, com:8.4},
-  // ริทชวล & โปรแกรม (จากรูป Image 2)
+  // ริทชวล & โปรแกรม
   {id:52, cat:"ริทชวล & โปรแกรม", name:"Pressure of points",       time:1.5,  com:12.6},
   {id:53, cat:"ริทชวล & โปรแกรม", name:"Oriental eastern charms",  time:1.5,  com:12.6},
   {id:54, cat:"ริทชวล & โปรแกรม", name:"Cleopatra's dream",        time:1.5,  com:12.6},
@@ -220,7 +257,6 @@ const MASSAGE_LIST = [
   {id:56, cat:"ริทชวล & โปรแกรม", name:"Chocolate body therapy",   time:2,    com:14.7},
   {id:57, cat:"ริทชวล & โปรแกรม", name:"Slimming body therapy",    time:2,    com:15.8},
   {id:58, cat:"ริทชวล & โปรแกรม", name:"Egzotic Bali ritual",      time:2.5,  com:17.9},
-  // รายการด้านล่างจากรูป Image 1 (ไม่มีใน from OCTOBER ใช้ค่าช่องติดชื่อ)
   {id:59, cat:"ริทชวล & โปรแกรม", name:"Thai body ritual",         time:1.5,  com:12},
   {id:60, cat:"ริทชวล & โปรแกรม", name:"Exotic 3 massage combo",   time:0.75, com:6.5},
   {id:61, cat:"ริทชวล & โปรแกรม", name:"Aroma magic",              time:1.5,  com:11},
@@ -230,25 +266,25 @@ const MASSAGE_LIST = [
   {id:65, cat:"ริทชวล & โปรแกรม", name:"Energizing spa therapy for men", time:1, com:9},
   {id:66, cat:"ริทชวล & โปรแกรม", name:"Thai back cinnamon",       time:0.5,  com:6},
   {id:67, cat:"ริทชวล & โปรแกรม", name:"Thai/oil+gift (feet bath)", time:1,   com:8},
-  // สำหรับคู่ (จากรูป Image 1 และ Image 2)
-  {id:68, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (22)",       time:2,   com:22},
-  {id:69, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two",              time:1.5, com:20},
-  {id:70, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two",         time:1,   com:14},
-  {id:71, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (19)", time:1.5, com:19},
-  {id:72, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (20)", time:1.5, com:20},
-  {id:73, cat:"สำหรับคู่ (2 therapists)", name:"Charming island for two",        time:1,   com:14},
-  {id:74, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two (23)",       time:2,   com:23},
-  {id:75, cat:"สำหรับคู่ (2 therapists)", name:"Eastern body bliss for two",     time:1.5, com:21},
-  {id:76, cat:"สำหรับคู่ (2 therapists)", name:"Thai ritual for two",            time:2,   com:27.3},
-  {id:77, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (31.5)",  time:2,   com:31.5},
-  {id:78, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (31.5)",       time:2.5, com:31.5},
-  {id:79, cat:"สำหรับคู่ (2 therapists)", name:"Indonesian ritual for two",      time:2.5, com:33.6},
-  // Marine Therapy (จากรูป Image 2)
+  // สำหรับคู่ (อัปเดตค่าคอมทุกรายการ)
+  {id:68, cat:"สำหรับคู่ (2 therapists)", name:"GD Bali island for two",          time:2,   com:11},
+  {id:69, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (1.5h)",        time:1.5, com:10},
+  {id:70, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (1h)",     time:1,   com:7},
+  {id:71, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (9.5)", time:1.5, com:9.5},
+  {id:72, cat:"สำหรับคู่ (2 therapists)", name:"Thai magic ritual for two (10)",  time:1.5, com:10},
+  {id:73, cat:"สำหรับคู่ (2 therapists)", name:"Charming island for two",         time:1,   com:7},
+  {id:74, cat:"สำหรับคู่ (2 therapists)", name:"Bali island for two",             time:2,   com:11.5},
+  {id:75, cat:"สำหรับคู่ (2 therapists)", name:"Eastern body bliss for two",      time:1.5, com:10.5},
+  {id:76, cat:"สำหรับคู่ (2 therapists)", name:"Thai ritual for two",             time:2,   com:13.65},
+  {id:77, cat:"สำหรับคู่ (2 therapists)", name:"Eastern charms for two (2h)",     time:2,   com:15.75},
+  {id:78, cat:"สำหรับคู่ (2 therapists)", name:"Chocolate for two (2.5h)",        time:2.5, com:15.75},
+  {id:79, cat:"สำหรับคู่ (2 therapists)", name:"Indonesian ritual for two",       time:2.5, com:16.80},
+  // Marine Therapy
   {id:80, cat:"Marine Therapy", name:"Relaxing marine therapy",   time:1.5, com:11.6},
   {id:81, cat:"Marine Therapy", name:"Energising marine therapy", time:1.5, com:13.7},
   {id:82, cat:"Marine Therapy", name:"Detoxing marine therapy",   time:1.5, com:11.6},
   {id:83, cat:"Marine Therapy", name:"Slimming marine therapy",   time:1.5, com:13.7},
-  // คุณแม่ตั้งครรภ์ (จากรูป Image 2)
+  // คุณแม่ตั้งครรภ์
   {id:84, cat:"คุณแม่ตั้งครรภ์", name:"I trimester",      time:1.5, com:11.6},
   {id:85, cat:"คุณแม่ตั้งครรภ์", name:"II-III trimester", time:1.5, com:11.6},
   {id:86, cat:"คุณแม่ตั้งครรภ์", name:"After birth",      time:1.5, com:11.6},
@@ -261,14 +297,29 @@ let records={};
 let currentDate=todayStr();
 let selectedCat="ทั้งหมด";
 let currentTab="today";
+let rate=38;
 
 function todayStr(){return new Date().toISOString().slice(0,10);}
 function fmtDate(d){const[y,m,day]=d.split("-");return`${day}/${m}/${y}`;}
 function monthKey(d){return d.slice(0,7);}
-function load(){try{records=JSON.parse(localStorage.getItem("spa_v2")||"{}");}catch(e){records={};}}
-function save(){localStorage.setItem("spa_v2",JSON.stringify(records));}
+function toThb(eur){return Math.round(eur*rate);}
+function fmtThb(eur){return"฿"+toThb(eur).toLocaleString();}
+function fmtEur(eur){return"€"+eur.toFixed(2);}
 
-load();
+function load(){try{records=JSON.parse(localStorage.getItem("spa_v3")||"{}");}catch(e){records={};}}
+function save(){localStorage.setItem("spa_v3",JSON.stringify(records));}
+function loadRate(){const r=parseFloat(localStorage.getItem("spa_rate"));if(r&&r>0){rate=r;document.getElementById("rate-input").value=r;}}
+function saveRate(){localStorage.setItem("spa_rate",rate);}
+
+function onRateChange(){
+  const v=parseFloat(document.getElementById("rate-input").value);
+  if(v>0){rate=v;saveRate();}
+  document.getElementById("rate-display").textContent="อัตราปัจจุบัน: "+rate+" ฿/€";
+  renderAll();
+}
+
+load();loadRate();
+document.getElementById("rate-display").textContent="อัตราปัจจุบัน: "+rate+" ฿/€";
 document.getElementById("date-input").value=currentDate;
 document.getElementById("date-input").addEventListener("change",function(){currentDate=this.value;updateTodayBtn();renderAll();});
 buildCatButtons();
@@ -289,16 +340,21 @@ function switchTab(tab,el){
 
 function renderAll(){
   const entries=records[currentDate]||[];
-  const dayTotal=entries.reduce((s,e)=>s+e.com,0);
+  const dayEur=entries.reduce((s,e)=>s+e.com,0);
   const dayHours=entries.reduce((s,e)=>s+e.time,0);
   const mk=monthKey(currentDate);
   const monthDays=Object.keys(records).filter(d=>d.startsWith(mk));
-  const monthTotal=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
-  document.getElementById("hdr-today").textContent=dayTotal.toFixed(1);
+  const monthEur=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
+
+  document.getElementById("hdr-today").textContent=fmtEur(dayEur);
+  document.getElementById("hdr-today-thb").textContent=fmtThb(dayEur);
+
   if(currentTab==="today"){
     document.getElementById("day-meta").textContent=`${fmtDate(currentDate)} — ${entries.length} รายการ | ${dayHours.toFixed(1)} ชม.`;
-    document.getElementById("day-total").textContent=dayTotal.toFixed(1);
-    document.getElementById("month-total-small").textContent=monthTotal.toFixed(1);
+    document.getElementById("day-total-eur").textContent=fmtEur(dayEur);
+    document.getElementById("day-total-thb").textContent=fmtThb(dayEur);
+    document.getElementById("month-total-eur").textContent=fmtEur(monthEur);
+    document.getElementById("month-total-thb").textContent=fmtThb(monthEur);
     renderEntries(entries);
   }
   if(currentTab==="history")renderHistory();
@@ -310,7 +366,12 @@ function renderEntries(entries){
   if(!entries.length){c.innerHTML="";return;}
   let html=`<div class="section-title">รายการวันนี้</div>`;
   entries.forEach((e,i)=>{
-    html+=`<div class="entry"><div class="entry-num">${i+1}</div><div class="entry-info"><div class="entry-name">${e.name}</div><div class="entry-sub">${e.time}h · ${e.at}</div></div><div class="entry-com">${e.com.toFixed(1)}</div><button class="entry-del" onclick="removeEntry('${currentDate}',${e.id})">×</button></div>`;
+    html+=`<div class="entry">
+      <div class="entry-num">${i+1}</div>
+      <div class="entry-info"><div class="entry-name">${e.name}</div><div class="entry-sub">${e.time}h · ${e.at}</div></div>
+      <div class="entry-com"><div class="eur">${fmtEur(e.com)}</div><div class="thb">${fmtThb(e.com)}</div></div>
+      <button class="entry-del" onclick="removeEntry('${currentDate}',${e.id})">×</button>
+    </div>`;
   });
   c.innerHTML=html;
 }
@@ -326,7 +387,13 @@ function renderHistory(){
     const hours=entries.reduce((s,e)=>s+e.time,0);
     const tags=entries.slice(0,4).map(e=>`<span class="hist-tag">${e.name.split(" ").slice(0,3).join(" ")}</span>`).join("");
     const more=entries.length>4?`<span style="font-size:10px;color:#888">+${entries.length-4}</span>`:"";
-    html+=`<div class="hist-card" onclick="jumpToDate('${date}')"><div class="hist-top"><div><div class="hist-date">${fmtDate(date)}</div><div class="hist-meta">${entries.length} รายการ · ${hours.toFixed(1)} ชม.</div></div><div><div class="hist-total">${total.toFixed(1)}</div><div class="hist-total-lbl">ค่าคอม</div></div></div><div class="hist-tags">${tags}${more}</div></div>`;
+    html+=`<div class="hist-card" onclick="jumpToDate('${date}')">
+      <div class="hist-top">
+        <div><div class="hist-date">${fmtDate(date)}</div><div class="hist-meta">${entries.length} รายการ · ${hours.toFixed(1)} ชม.</div></div>
+        <div class="hist-com"><div class="eur">${fmtEur(total)}</div><div class="thb">${fmtThb(total)}</div></div>
+      </div>
+      <div class="hist-tags">${tags}${more}</div>
+    </div>`;
   });
   c.innerHTML=html;
 }
@@ -347,17 +414,23 @@ function renderSummary(){
   const[y,m]=mk.split("-");
   document.getElementById("month-label").textContent=`สรุปเดือน ${m}/${y}`;
   const monthDays=Object.keys(records).filter(d=>d.startsWith(mk)&&(records[d]||[]).length>0);
-  const monthTotal=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
+  const monthEur=monthDays.reduce((s,d)=>s+(records[d]||[]).reduce((ss,e)=>ss+e.com,0),0);
   const monthSessions=monthDays.reduce((s,d)=>s+(records[d]||[]).length,0);
-  document.getElementById("s-total").textContent=monthTotal.toFixed(1);
+  const avg=monthDays.length?monthEur/monthDays.length:0;
+  document.getElementById("s-eur").textContent=fmtEur(monthEur);
+  document.getElementById("s-thb").textContent=fmtThb(monthEur);
   document.getElementById("s-sessions").textContent=monthSessions;
   document.getElementById("s-days").textContent=monthDays.length;
-  document.getElementById("s-avg").textContent=monthDays.length?(monthTotal/monthDays.length).toFixed(1):"0";
+  document.getElementById("s-avg-eur").textContent=fmtEur(avg);
+  document.getElementById("s-avg-thb").textContent=fmtThb(avg);
   let html="";
   monthDays.sort().reverse().forEach(date=>{
     const entries=records[date]||[];
     const total=entries.reduce((s,e)=>s+e.com,0);
-    html+=`<div class="day-row"><div><span class="day-row-name">${fmtDate(date)}</span><span class="day-row-sub">${entries.length} รายการ</span></div><div class="day-row-val">${total.toFixed(1)}</div></div>`;
+    html+=`<div class="day-row">
+      <div class="day-left"><div class="name">${fmtDate(date)}</div><div class="sub">${entries.length} รายการ</div></div>
+      <div class="day-right"><div class="eur">${fmtEur(total)}</div><div class="thb">${fmtThb(total)}</div></div>
+    </div>`;
   });
   document.getElementById("summary-days").innerHTML=html||`<div class="empty">ยังไม่มีข้อมูลเดือนนี้</div>`;
 }
@@ -395,7 +468,13 @@ function renderPicker(){
     const color=CAT_COLORS[cat]||"#555";
     html+=`<div class="cat-label" style="color:${color}">${cat}</div>`;
     items.forEach(m=>{
-      html+=`<button class="massage-btn" onclick='addMassage(MASSAGE_LIST.find(x=>x.id===${m.id}))'><div><div class="massage-name">${m.name}</div><div class="massage-time">${m.time}h</div></div><div class="massage-com" style="background:${color}">${m.com.toFixed(1)}</div></button>`;
+      html+=`<button class="massage-btn" onclick='addMassage(MASSAGE_LIST.find(x=>x.id===${m.id}))'>
+        <div><div class="massage-name">${m.name}</div><div class="massage-time">${m.time}h</div></div>
+        <div class="massage-com">
+          <span class="eur" style="background:${color}">${fmtEur(m.com)}</span>
+          <span class="thb">${fmtThb(m.com)}</span>
+        </div>
+      </button>`;
     });
   });
   if(!html)html=`<div class="empty">ไม่พบรายการที่ค้นหา</div>`;
